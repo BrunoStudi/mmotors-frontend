@@ -98,8 +98,8 @@ export default function Vehicles() {
               )}
 
               <div className="vehicle-content">
-                <span className={`badge-type ${vehicle.type}`}>
-                  {vehicle.type}
+                <span className={`badge-type ${vehicle.type?.toLowerCase()}`}>
+                    {vehicle.type?.toUpperCase()}
                 </span>
                 <h2>{vehicle.brand} {vehicle.model}</h2>
                 <p className="vehicle-price">{vehicle.price} €</p>
