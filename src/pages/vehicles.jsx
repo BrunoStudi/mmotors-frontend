@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react"
 import API from "../services/api"
+import { useNavigate } from "react-router-dom"
 
 export default function Vehicles() {
   const [vehicles, setVehicles] = useState([])
   const [loading, setLoading] = useState(true)
   const [filter, setFilter] = useState("all")
+  const navigate = useNavigate()
+  const token = localStorage.getItem("token")
+  const isAdmin = token && JSON.parse(atob(token.split(".")[1])).role === "admin"
 
   useEffect(() => {
   const fetchVehicles = async () => {
@@ -43,6 +47,7 @@ export default function Vehicles() {
         <p>Découvrez les véhicules disponibles à l’achat ou en location longue durée.</p>
       </div>
 
+      <div className="vehicle-toolbar">
       <div className="vehicle-filters">
         <button
           className={filter === "all" ? "active" : ""}
@@ -66,6 +71,16 @@ export default function Vehicles() {
         </button>
       </div>
 
+      {isAdmin && (
+        <button
+          className="btn primary"
+          onClick={() => navigate("/add-vehicle")}
+        >
+          + Ajouter un véhicule
+        </button>
+      )}
+    </div>
+
       <div className="vehicles-grid">
         {vehicles.map((vehicle) => {
           const imageUrl = vehicle.images?.[0]?.image_url
@@ -83,7 +98,9 @@ export default function Vehicles() {
               )}
 
               <div className="vehicle-content">
-                <span className="badge-type">{vehicle.type}</span>
+                <span className={`badge-type ${vehicle.type}`}>
+                  {vehicle.type}
+                </span>
                 <h2>{vehicle.brand} {vehicle.model}</h2>
                 <p className="vehicle-price">{vehicle.price} €</p>
               </div>

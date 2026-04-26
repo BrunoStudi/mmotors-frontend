@@ -284,7 +284,6 @@ a {
   margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 300px));
-  justify-content: center;
   gap: 24px;
 }
 
@@ -326,11 +325,21 @@ a {
   display: inline-block;
   padding: 6px 10px;
   border-radius: 999px;
-  background: rgba(37, 99, 235, 0.2);
-  color: #93c5fd;
   font-size: 13px;
   font-weight: 700;
   text-transform: uppercase;
+}
+
+/* Vente = bleu */
+.badge-type.vente {
+  background: rgba(37, 99, 235, 0.2);
+  color: #93c5fd;
+}
+
+/* Location = vert */
+.badge-type.location {
+  background: rgba(16, 185, 129, 0.2);
+  color: #6ee7b7;
 }
 
 .vehicle-card h2 {
@@ -363,4 +372,21 @@ a {
 
 .vehicle-filters button.active {
   background: #2563eb;
+}
+
+
+.vehicle-toolbar {
+  max-width: 1200px;
+  margin: 0 auto 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.vehicle-filters {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-start;
+  margin: 0;
+  max-width: none;
 }
