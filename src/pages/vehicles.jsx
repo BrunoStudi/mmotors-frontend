@@ -4,21 +4,28 @@ import API from "../services/api"
 export default function Vehicles() {
   const [vehicles, setVehicles] = useState([])
   const [loading, setLoading] = useState(true)
+  const [filter, setFilter] = useState("all")
 
   useEffect(() => {
-    const fetchVehicles = async () => {
-      try {
-        const response = await API.get("/vehicles")
-        setVehicles(response.data)
-      } catch (err) {
-        console.error(err)
-      } finally {
-        setLoading(false)
-      }
-    }
+  const fetchVehicles = async () => {
+    try {
+      let url = "/vehicles"
 
-    fetchVehicles()
-  }, [])
+      if (filter !== "all") {
+        url += `?type=${filter}`
+      }
+
+      const response = await API.get(url)
+      setVehicles(response.data)
+    } catch (err) {
+      console.error(err)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  fetchVehicles()
+}, [filter])
 
   if (loading) {
     return (
@@ -34,6 +41,29 @@ export default function Vehicles() {
         <p className="badge">Catalogue</p>
         <h1>Nos véhicules</h1>
         <p>Découvrez les véhicules disponibles à l’achat ou en location longue durée.</p>
+      </div>
+
+      <div className="vehicle-filters">
+        <button
+          className={filter === "all" ? "active" : ""}
+          onClick={() => setFilter("all")}
+        >
+          Tous
+        </button>
+
+        <button
+          className={filter === "vente" ? "active" : ""}
+          onClick={() => setFilter("vente")}
+        >
+          Vente
+        </button>
+
+        <button
+          className={filter === "location" ? "active" : ""}
+          onClick={() => setFilter("location")}
+        >
+          Location
+        </button>
       </div>
 
       <div className="vehicles-grid">
