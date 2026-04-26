@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { Link } from "react-router-dom"
 import API from "../services/api"
 
 export default function Register() {
@@ -13,51 +14,62 @@ export default function Register() {
     setError("")
 
     try {
-      await API.post("/auth/register", {
-        email,
-        password,
-      })
-
-      setMessage("Compte créé avec succès.")
+      await API.post("/auth/register", { email, password })
+      setMessage("Compte créé avec succès. Vous pouvez maintenant vous connecter.")
       setEmail("")
       setPassword("")
     } catch (err) {
-      setError(
-        err.response?.data?.detail || "Erreur lors de la création du compte."
-      )
+      setError(err.response?.data?.detail || "Erreur lors de la création du compte.")
     }
   }
 
   return (
-    <main>
-      <h1>Créer un compte</h1>
-
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Email</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
+    <main className="auth-page">
+      <section className="auth-card">
+        <div className="auth-header">
+          <p className="badge">Espace client</p>
+          <h1>Créer un compte</h1>
+          <p>
+            Créez votre espace personnel pour déposer un dossier d’achat ou de
+            location longue durée.
+          </p>
         </div>
 
-        <div>
-          <label>Mot de passe</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
+        <form className="auth-form" onSubmit={handleSubmit}>
+          <label>
+            Adresse email
+            <input
+              type="email"
+              placeholder="client@mmotors.fr"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </label>
 
-        <button type="submit">Créer mon compte</button>
-      </form>
+          <label>
+            Mot de passe
+            <input
+              type="password"
+              placeholder="Votre mot de passe"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </label>
 
-      {message && <p>{message}</p>}
-      {error && <p>{error}</p>}
+          <button className="btn primary full" type="submit">
+            Créer mon compte
+          </button>
+        </form>
+
+        {message && <p className="success-message">{message}</p>}
+        {error && <p className="error-message">{error}</p>}
+
+        <p className="auth-link">
+          Déjà un compte ? <Link to="/login">Se connecter</Link>
+        </p>
+      </section>
     </main>
   )
 }
