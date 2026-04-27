@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react"
-import { Link, useParams } from "react-router-dom"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
 import API from "../services/api"
-
 
 export default function VehicleDetails() {
   const { id } = useParams()
+  const navigate = useNavigate()
+
   const [vehicle, setVehicle] = useState(null)
   const [loading, setLoading] = useState(true)
   const [selectedImage, setSelectedImage] = useState(null)
-  const navigate = useNavigate()
+
   const token = localStorage.getItem("token")
   const isAdmin = token && JSON.parse(atob(token.split(".")[1])).role === "admin"
 
@@ -28,6 +28,25 @@ export default function VehicleDetails() {
 
     fetchVehicle()
   }, [id])
+
+  const handleDelete = async () => {
+    const confirmDelete = window.confirm("Supprimer ce véhicule ?")
+
+    if (!confirmDelete) return
+
+    try {
+      await API.delete(`/vehicles/${vehicle.id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+
+      navigate("/vehicles")
+    } catch (err) {
+      console.error(err)
+      alert("Erreur lors de la suppression")
+    }
+  }
 
   if (loading) {
     return <main className="vehicle-details-page">Chargement...</main>
@@ -85,12 +104,18 @@ export default function VehicleDetails() {
           <p className="vehicle-details-price">{vehicle.price} €</p>
 
           {isAdmin && (
-            <button
-              className="btn primary edit-btn"
-              onClick={() => navigate(`/edit-vehicle/${vehicle.id}`)}
-            >
-              Modifier
-            </button>
+            <div className="vehicle-admin-actions">
+              <button
+                className="btn primary edit-btn small"
+                onClick={() => navigate(`/edit-vehicle/${vehicle.id}`)}
+              >
+                Modifier
+              </button>
+
+              <button className="btn danger small" onClick={handleDelete}>
+                Supprimer
+              </button>
+            </div>
           )}
 
           <div className="vehicle-details-grid">

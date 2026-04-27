@@ -74,8 +74,14 @@ a {
 }
 
 .btn.primary {
-  background: #2563eb;
+  background: rgba(37, 99, 235, 0.9);
   color: white;
+  transition: all 0.2s ease;
+}
+
+.btn.primary:hover {
+  background: rgba(29, 78, 216, 1);
+  transform: translateY(-1px);
 }
 
 .btn.secondary {
@@ -518,4 +524,38 @@ a {
   margin-top: 16px;
   margin-bottom: 28px;
   align-self: flex-start;
+  margin: 0;
+}
+
+.vehicle-admin-actions {
+  display: flex;
+  gap: 12px;
+  margin: 16px 0 24px;
+  align-items: center;
+}
+
+.vehicle-admin-actions .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  padding: 0 16px;
+  margin: 0;
+  line-height: 1;
+}
+
+.btn.danger {
+  background: rgba(220, 38, 38, 0.9);
+  color: white;
+}
+
+.btn.danger:hover {
+  background: rgba(185, 28, 28, 1);
+  transform: translateY(-1px);
+}
+
+.btn.small {
+  padding: 8px 14px;
+  font-size: 14px;
+  border-radius: 10px;
 }
