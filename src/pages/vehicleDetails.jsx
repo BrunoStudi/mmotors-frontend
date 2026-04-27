@@ -1,12 +1,17 @@
 import { useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import API from "../services/api"
+
 
 export default function VehicleDetails() {
   const { id } = useParams()
   const [vehicle, setVehicle] = useState(null)
   const [loading, setLoading] = useState(true)
   const [selectedImage, setSelectedImage] = useState(null)
+  const navigate = useNavigate()
+  const token = localStorage.getItem("token")
+  const isAdmin = token && JSON.parse(atob(token.split(".")[1])).role === "admin"
 
   useEffect(() => {
     const fetchVehicle = async () => {
@@ -78,6 +83,15 @@ export default function VehicleDetails() {
           </h1>
 
           <p className="vehicle-details-price">{vehicle.price} €</p>
+
+          {isAdmin && (
+            <button
+              className="btn primary"
+              onClick={() => navigate(`/edit-vehicle/${vehicle.id}`)}
+            >
+              Modifier
+            </button>
+          )}
 
           <div className="vehicle-details-grid">
             <div>

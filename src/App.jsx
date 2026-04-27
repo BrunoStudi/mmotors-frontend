@@ -5,6 +5,7 @@ import Register from "./pages/Register"
 import Vehicles from "./pages/vehicles"
 import VehicleDetails from "./pages/vehicleDetails"
 import AddVehicle from "./pages/addVehicle"
+import EditVehicle from "./pages/editVehicle"
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/vehicles" element={<Vehicles />} />
         <Route path="/vehicles/:id" element={<VehicleDetails />} />
         <Route path="/add-vehicle" element={<AddVehicle />} />
+        <Route path="/edit-vehicle/:id" element={<EditVehicle />} />
       </Routes>
     </BrowserRouter>
   )
