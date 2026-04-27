@@ -149,7 +149,7 @@ export default function VehicleDetails() {
             <div>
               <span>Puissance</span>
               <strong>
-                {vehicle.power ? `${vehicle.power} ch` : "Non renseignée"}
+                {vehicle.power ? `${vehicle.power} chx` : "Non renseignée"}
               </strong>
             </div>
           </div>

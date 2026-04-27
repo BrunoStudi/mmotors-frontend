@@ -18,7 +18,7 @@ export default function AddVehicle() {
     })
 
     const [error, setError] = useState("")
-    const [image, setImage] = useState(null)
+    const [images, setImages] = useState([])
 
     const handleChange = (e) => {
         setForm({
@@ -56,20 +56,22 @@ export default function AddVehicle() {
 
             const vehicleId = response.data.id
 
-            if (image) {
-                const formData = new FormData()
-                formData.append("image", image)
+            if (images.length > 0) {
+                for (const image of images) {
+                    const formData = new FormData()
+                    formData.append("image", image)
 
-                await API.post(
-                    `/vehicles/${vehicleId}/images`,
-                    formData,
-                    {
-                        headers: {
-                            Authorization: `Bearer ${token}`,
-                            "Content-Type": "multipart/form-data",
-                        },
-                    }
-                )
+                    await API.post(
+                        `/vehicles/${vehicleId}/images`,
+                        formData,
+                        {
+                            headers: {
+                                Authorization: `Bearer ${token}`,
+                                "Content-Type": "multipart/form-data",
+                            },
+                        }
+                    )
+                }
             }
 
             navigate("/vehicles")
@@ -138,8 +140,14 @@ export default function AddVehicle() {
                         <input
                             type="file"
                             accept="image/*"
-                            onChange={(e) => setImage(e.target.files[0])}
+                            multiple
+                            onChange={(e) => setImages(Array.from(e.target.files))}
                         />
+                        {images.length > 0 && (
+                            <p className="selected-files">
+                                {images.length} image(s) sélectionnée(s)
+                            </p>
+                        )}
                     </label>
 
                     <button className="btn primary full" type="submit">
