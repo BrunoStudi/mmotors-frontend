@@ -26,6 +26,7 @@ export default function AdminDossiers() {
     fetchDossiers()
   }, [])
 
+
   const handleUpdateStatus = async (id, status) => {
     try {
       await API.put(
@@ -138,7 +139,7 @@ export default function AdminDossiers() {
               <div key={dossier.id} className="table-row">
                 <span>
                   <strong>#{dossier.id}</strong>
-                  <small>{new Date(dossier.created_at).toLocaleDateString()}</small>
+                  <small>{new Date(dossier.created_at).toLocaleDateString("fr-FR")}</small>
                 </span>
 
                 <span>
