@@ -5,6 +5,8 @@ import API from "../services/api"
 export default function EditVehicle() {
   const { id } = useParams()
   const navigate = useNavigate()
+  const [images, setImages] = useState([])
+  const [vehicle, setVehicle] = useState(null)
 
   const [form, setForm] = useState({
     brand: "",
@@ -35,6 +37,9 @@ export default function EditVehicle() {
           power: v.power || "",
           description: v.description || "",
         })
+
+        setVehicle(v)
+        
       } catch (err) {
         console.error(err)
       }
@@ -76,6 +81,26 @@ export default function EditVehicle() {
         }
       )
 
+      if (images.length > 0) {
+        const token = localStorage.getItem("token")
+
+        for (const image of images) {
+          const formData = new FormData()
+          formData.append("image", image)
+
+          await API.post(
+            `/vehicles/${id}/images`,
+            formData,
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "multipart/form-data",
+              },
+            }
+          )
+        }
+      }
+
       navigate(`/vehicles/${id}`)
     } catch (err) {
       console.error(err)
@@ -104,6 +129,35 @@ export default function EditVehicle() {
           <input name="power" type="number" value={form.power} onChange={handleChange} placeholder="Puissance" />
 
           <textarea name="description" value={form.description} onChange={handleChange} placeholder="Description" />
+
+          4. Afficher les images existantes
+
+          Dans ton JSX, ajoute :
+
+          {vehicle?.images?.length > 0 && (
+            <div className="edit-images">
+              <p>Images actuelles :</p>
+              <div className="edit-thumbnails">
+                {vehicle.images.map((img) => (
+                  <img
+                    key={img.id}
+                    src={`http://127.0.0.1:8000${img.image_url}`}
+                    alt="vehicle"
+                  />
+                ))}
+              </div>
+            </div>
+          )}
+
+          <label>
+            Ajouter des images
+            <input
+              type="file"
+              accept="image/*"
+              multiple
+              onChange={(e) => setImages(Array.from(e.target.files))}
+            />
+          </label>
 
           <button type="submit" className="btn primary">
             Sauvegarder
