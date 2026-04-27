@@ -7,6 +7,8 @@ import Vehicles from "./pages/vehicles"
 import VehicleDetails from "./pages/vehicleDetails"
 import AddVehicle from "./pages/addVehicle"
 import EditVehicle from "./pages/editVehicle"
+import MesDossiers from "./pages/mesDossiers"
+import AdminDossiers from "./pages/adminDossiers"
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
         <Route path="/vehicles/:id" element={<VehicleDetails />} />
         <Route path="/add-vehicle" element={<AddVehicle />} />
         <Route path="/edit-vehicle/:id" element={<EditVehicle />} />
+        <Route path="/mes-dossiers" element={<MesDossiers />} />
+        <Route path="/admin/dossiers" element={<AdminDossiers />} />
       </Routes>
     </BrowserRouter>
   )

@@ -48,6 +48,35 @@ export default function VehicleDetails() {
     }
   }
 
+  const handleCreateDossier = async () => {
+    const token = localStorage.getItem("token")
+
+    if (!token) {
+      navigate("/login")
+      return
+    }
+
+    try {
+      await API.post(
+        "/dossiers/",
+        {
+          vehicle_id: vehicle.id,
+          message: `Demande de ${vehicle.type} pour ${vehicle.brand} ${vehicle.model}`,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+
+      navigate("/mes-dossiers")
+    } catch (err) {
+      console.error(err)
+      alert("Erreur lors du dépôt du dossier.")
+    }
+  }
+
   if (loading) {
     return <main className="vehicle-details-page">Chargement...</main>
   }
@@ -102,6 +131,9 @@ export default function VehicleDetails() {
           </h1>
 
           <p className="vehicle-details-price">{vehicle.price} €</p>
+          <button className="btn primary dossier-btn" onClick={handleCreateDossier}>
+            Déposer un dossier
+          </button>
 
           {isAdmin && (
             <div className="vehicle-admin-actions">
