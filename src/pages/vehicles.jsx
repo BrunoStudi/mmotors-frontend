@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import API from "../services/api"
 import { useNavigate } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 export default function Vehicles() {
   const [vehicles, setVehicles] = useState([])
@@ -86,7 +87,7 @@ export default function Vehicles() {
           const imageUrl = vehicle.images?.[0]?.image_url
 
           return (
-            <article key={vehicle.id} className="vehicle-card">
+            <Link key={vehicle.id} to={`/vehicles/${vehicle.id}`} className="vehicle-card">
               {imageUrl ? (
                 <img
                   src={`http://127.0.0.1:8000${imageUrl}`}
@@ -104,7 +105,7 @@ export default function Vehicles() {
                 <h2>{vehicle.brand} {vehicle.model}</h2>
                 <p className="vehicle-price">{vehicle.price} €</p>
               </div>
-            </article>
+            </Link>
           )
         })}
       </div>
