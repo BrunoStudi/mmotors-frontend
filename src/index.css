@@ -645,3 +645,57 @@ a {
   font-weight: 900;
   line-height: 1;
 }
+
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  height: 72px;
+  padding: 0 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(2, 6, 23, 0.82);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.18);
+  backdrop-filter: blur(14px);
+}
+
+.navbar-logo {
+  color: #f8fafc;
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: -0.5px;
+}
+
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.navbar-links a,
+.navbar-links button {
+  color: #cbd5e1;
+  background: none;
+  border: none;
+  font: inherit;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.navbar-links a:hover,
+.navbar-links button:hover {
+  color: #93c5fd;
+}
+
+@media (max-width: 700px) {
+  .navbar {
+    padding: 0 20px;
+  }
+
+  .navbar-links {
+    gap: 12px;
+    font-size: 14px;
+  }
+}
