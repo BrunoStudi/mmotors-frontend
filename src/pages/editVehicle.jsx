@@ -39,7 +39,7 @@ export default function EditVehicle() {
         })
 
         setVehicle(v)
-        
+
       } catch (err) {
         console.error(err)
       }
@@ -108,6 +108,30 @@ export default function EditVehicle() {
     }
   }
 
+  const handleDeleteImage = async (imageId) => {
+    const confirmDelete = window.confirm("Supprimer cette image ?")
+
+    if (!confirmDelete) return
+
+    const token = localStorage.getItem("token")
+
+    try {
+      await API.delete(`/vehicles/images/${imageId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+
+      setVehicle({
+        ...vehicle,
+        images: vehicle.images.filter((img) => img.id !== imageId),
+      })
+    } catch (err) {
+      console.error(err)
+      alert("Erreur lors de la suppression de l'image.")
+    }
+  }
+
   return (
     <main className="auth-page">
       <section className="auth-card">
@@ -130,20 +154,26 @@ export default function EditVehicle() {
 
           <textarea name="description" value={form.description} onChange={handleChange} placeholder="Description" />
 
-          4. Afficher les images existantes
-
-          Dans ton JSX, ajoute :
-
           {vehicle?.images?.length > 0 && (
             <div className="edit-images">
               <p>Images actuelles :</p>
+
               <div className="edit-thumbnails">
                 {vehicle.images.map((img) => (
-                  <img
-                    key={img.id}
-                    src={`http://127.0.0.1:8000${img.image_url}`}
-                    alt="vehicle"
-                  />
+                  <div key={img.id} className="edit-thumbnail-wrapper">
+                    <img
+                      src={`http://127.0.0.1:8000${img.image_url}`}
+                      alt="vehicle"
+                    />
+
+                    <button
+                      type="button"
+                      className="delete-image-btn"
+                      onClick={() => handleDeleteImage(img.id)}
+                    >
+                      ×
+                    </button>
+                  </div>
                 ))}
               </div>
             </div>
