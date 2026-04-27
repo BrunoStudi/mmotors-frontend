@@ -6,12 +6,14 @@ export default function VehicleDetails() {
   const { id } = useParams()
   const [vehicle, setVehicle] = useState(null)
   const [loading, setLoading] = useState(true)
+  const [selectedImage, setSelectedImage] = useState(null)
 
   useEffect(() => {
     const fetchVehicle = async () => {
       try {
         const response = await API.get(`/vehicles/${id}`)
         setVehicle(response.data)
+        setSelectedImage(response.data.images?.[0]?.image_url || null)
       } catch (err) {
         console.error(err)
       } finally {
@@ -30,22 +32,39 @@ export default function VehicleDetails() {
     return <main className="vehicle-details-page">Véhicule introuvable</main>
   }
 
-  const imageUrl = vehicle.images?.[0]?.image_url
-
   return (
     <main className="vehicle-details-page">
-      <Link to="/vehicles" className="back-link">← Retour au catalogue</Link>
+      <Link to="/vehicles" className="back-link">
+        ← Retour au catalogue
+      </Link>
 
       <section className="vehicle-details-card">
-        <div className="vehicle-details-image-wrapper">
-          {imageUrl ? (
+        <div className="vehicle-gallery">
+          {selectedImage ? (
             <img
-              src={`http://127.0.0.1:8000${imageUrl}`}
+              src={`http://127.0.0.1:8000${selectedImage}`}
               alt={`${vehicle.brand} ${vehicle.model}`}
               className="vehicle-details-image"
             />
           ) : (
             <div className="vehicle-details-placeholder">🚗</div>
+          )}
+
+          {vehicle.images?.length > 1 && (
+            <div className="vehicle-thumbnails">
+              {vehicle.images.map((img) => (
+                <button
+                  key={img.id}
+                  className={selectedImage === img.image_url ? "active" : ""}
+                  onClick={() => setSelectedImage(img.image_url)}
+                >
+                  <img
+                    src={`http://127.0.0.1:8000${img.image_url}`}
+                    alt="Miniature véhicule"
+                  />
+                </button>
+              ))}
+            </div>
           )}
         </div>
 
@@ -54,7 +73,9 @@ export default function VehicleDetails() {
             {vehicle.type?.toUpperCase()}
           </span>
 
-          <h1>{vehicle.brand} {vehicle.model}</h1>
+          <h1>
+            {vehicle.brand} {vehicle.model}
+          </h1>
 
           <p className="vehicle-details-price">{vehicle.price} €</p>
 
