@@ -86,7 +86,7 @@ export default function VehicleDetails() {
 
           {isAdmin && (
             <button
-              className="btn primary"
+              className="btn primary edit-btn"
               onClick={() => navigate(`/edit-vehicle/${vehicle.id}`)}
             >
               Modifier

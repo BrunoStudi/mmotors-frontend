@@ -379,8 +379,8 @@ a {
   max-width: 1200px;
   margin: 0 auto 24px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  gap: 20px;
 }
 
 .vehicle-filters {
@@ -512,4 +512,10 @@ a {
 .auth-form textarea {
   min-height: 120px;
   resize: vertical;
+}
+
+.edit-btn {
+  margin-top: 16px;
+  margin-bottom: 28px;
+  align-self: flex-start;
 }
