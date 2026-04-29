@@ -6,8 +6,29 @@ export default function AdminDossiers() {
   const [loading, setLoading] = useState(true)
   const [search, setSearch] = useState("")
   const [statusFilter, setStatusFilter] = useState("all")
+  const [documents, setDocuments] = useState({})
 
   const token = localStorage.getItem("token")
+
+
+  const fetchDocuments = async (dossierId) => {
+    const token = localStorage.getItem("token")
+
+    try {
+      const res = await API.get(`/documents/${dossierId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+
+      setDocuments((prev) => ({
+        ...prev,
+        [dossierId]: res.data,
+      }))
+    } catch (err) {
+      console.error(err)
+    }
+  }
 
   useEffect(() => {
     const fetchDossiers = async () => {
@@ -16,6 +37,7 @@ export default function AdminDossiers() {
           headers: { Authorization: `Bearer ${token}` },
         })
         setDossiers(res.data)
+        res.data.forEach((d) => fetchDocuments(d.id))
       } catch (err) {
         console.error(err)
       } finally {
@@ -160,6 +182,24 @@ export default function AdminDossiers() {
 
                 <span className="dossier-message">
                   {dossier.message || "Aucun message"}
+                </span>
+
+                <span className="admin-documents">
+                  {documents[dossier.id]?.length > 0 ? (
+                    documents[dossier.id].map((doc) => (
+                      <a
+                        key={doc.id}
+                        href={`http://127.0.0.1:8000${doc.file_url}`}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="document-link"
+                      >
+                        📄
+                      </a>
+                    ))
+                  ) : (
+                    <span className="no-doc">—</span>
+                  )}
                 </span>
 
                 <span className="admin-actions">

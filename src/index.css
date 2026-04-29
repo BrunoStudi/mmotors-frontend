@@ -1071,3 +1071,37 @@ a {
   color: #fca5a5;
   font-size: 13px;
 }
+
+
+.dossier-documents {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.document-link {
+  color: #93c5fd;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.document-link:hover {
+  text-decoration: underline;
+}
+
+.no-doc {
+  color: #94a3b8;
+  font-size: 13px;
+}
+
+
+.admin-documents {
+  display: flex;
+  gap: 6px;
+}
+
+.admin-documents .document-link {
+  font-size: 16px;
+  text-decoration: none;
+}

@@ -4,7 +4,28 @@ import API from "../services/api"
 export default function MyDossiers() {
   const [dossiers, setDossiers] = useState([])
   const [loading, setLoading] = useState(true)
+  const [documents, setDocuments] = useState({})
 
+
+  const fetchDocuments = async (dossierId) => {
+    const token = localStorage.getItem("token")
+
+    try {
+      const res = await API.get(`/documents/${dossierId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+
+      setDocuments((prev) => ({
+        ...prev,
+        [dossierId]: res.data,
+      }))
+    } catch (err) {
+      console.error(err)
+    }
+  }
+  
   useEffect(() => {
     const fetchDossiers = async () => {
       const token = localStorage.getItem("token")
@@ -15,6 +36,7 @@ export default function MyDossiers() {
         })
 
         setDossiers(res.data)
+        res.data.forEach((d) => fetchDocuments(d.id))
       } catch (err) {
         console.error(err)
       } finally {
@@ -111,6 +133,23 @@ export default function MyDossiers() {
                     Dossier refusé — ajout de documents désactivé
                   </p>
                 )}
+                <div className="dossier-documents">
+                  {documents[dossier.id]?.length > 0 ? (
+                    documents[dossier.id].map((doc) => (
+                      <a
+                        key={doc.id}
+                        href={`http://127.0.0.1:8000${doc.file_url}`}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="document-link"
+                      >
+                        📄 {doc.filename}
+                      </a>
+                    ))
+                  ) : (
+                    <p className="no-doc">Aucun document</p>
+                  )}
+                </div>
               </div>
             </article>
           ))
