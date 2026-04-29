@@ -76,6 +76,7 @@ export default function AdminDossiers() {
 
     return matchSearch && matchStatus
   })
+  .sort((a, b) => a.id - b.id)
 
   const total = dossiers.length
   const enCours = dossiers.filter((d) => d.status === "en_cours").length
@@ -151,6 +152,7 @@ export default function AdminDossiers() {
             <span>Type</span>
             <span>Statut</span>
             <span>Message</span>
+            <span>Documents</span>
             <span>Actions</span>
           </div>
 

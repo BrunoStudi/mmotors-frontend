@@ -836,10 +836,10 @@ a {
 .table-header,
 .table-row {
   display: grid;
-  grid-template-columns: 120px 140px 140px 110px 120px 1fr 280px;
+  grid-template-columns: 90px 160px 150px 90px 110px minmax(220px, 1fr) 90px 240px;
   gap: 18px;
   align-items: center;
-  min-width: 1150px;
+  min-width: 1300px;
 }
 
 .table-header {
@@ -862,8 +862,19 @@ a {
   margin-top: 4px;
 }
 
+.table-row span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .dossier-message {
   color: #cbd5e1;
+  white-space: normal;       /* autorise retour à la ligne */
+  word-break: break-word;    /* coupe les mots longs si besoin */
+  overflow: hidden;
+  line-height: 1.4;
+  white-space: normal !important;
 }
 
 .status-pill {
@@ -898,7 +909,9 @@ a {
 .admin-actions {
   display: flex;
   gap: 8px;
-  justify-content: flex-end;
+  justify-content: flex-start;
+  align-items: center;
+  overflow: visible;
 }
 
 .admin-actions button {
@@ -909,6 +922,10 @@ a {
   border-radius: 10px;
   cursor: pointer;
   font-weight: 800;
+  padding: 6px 8px;
+  font-size: 12px;
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 
 .admin-actions button.success {
@@ -999,9 +1016,6 @@ a {
   font-size: 20px;
 }
 
-.dossier-message {
-  color: #cbd5e1;
-}
 
 .dossier-date {
   color: #94a3b8;
@@ -1104,4 +1118,9 @@ a {
 .admin-documents .document-link {
   font-size: 16px;
   text-decoration: none;
+}
+
+.admin-dossiers-table {
+  overflow-x: auto;
+  scrollbar-width: thin;
 }
