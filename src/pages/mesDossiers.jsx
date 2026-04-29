@@ -29,6 +29,29 @@ export default function MyDossiers() {
     return <main className="dossiers-page">Chargement...</main>
   }
 
+  const handleUploadDocument = async (dossierId, file) => {
+    if (!file) return
+
+    const token = localStorage.getItem("token")
+    const formData = new FormData()
+
+    formData.append("file", file)
+
+    try {
+      await API.post(`/documents/${dossierId}/documents`, formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
+        },
+      })
+
+      alert("Document ajouté avec succès.")
+    } catch (err) {
+      console.error(err)
+      alert("Erreur lors de l’ajout du document.")
+    }
+  }
+
   return (
     <main className="dossiers-page">
       <div className="dossiers-header">
@@ -73,6 +96,21 @@ export default function MyDossiers() {
                 <small className="dossier-date">
                   {new Date(dossier.created_at).toLocaleDateString("fr-FR")}
                 </small>
+                {dossier.status !== "refusé" ? (
+                  <label className="document-upload">
+                    Ajouter un document
+                    <input
+                      type="file"
+                      onChange={(e) =>
+                        handleUploadDocument(dossier.id, e.target.files[0])
+                      }
+                    />
+                  </label>
+                ) : (
+                  <p className="upload-disabled">
+                    Dossier refusé — ajout de documents désactivé
+                  </p>
+                )}
               </div>
             </article>
           ))

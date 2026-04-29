@@ -1050,3 +1050,24 @@ a {
     height: 190px;
   }
 }
+
+
+.document-upload {
+  margin-top: 10px;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 8px;
+  color: #93c5fd;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.document-upload input {
+  color: #cbd5e1;
+}
+
+.upload-disabled {
+  margin-top: 10px;
+  color: #fca5a5;
+  font-size: 13px;
+}
