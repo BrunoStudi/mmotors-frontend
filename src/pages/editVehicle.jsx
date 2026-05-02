@@ -162,7 +162,7 @@ export default function EditVehicle() {
                 {vehicle.images.map((img) => (
                   <div key={img.id} className="edit-thumbnail-wrapper">
                     <img
-                      src={`http://127.0.0.1:8000${img.image_url}`}
+                      src={`${import.meta.env.VITE_API_URL}${img.image_url}`}
                       alt="vehicle"
                     />
 

@@ -90,7 +90,7 @@ export default function Vehicles() {
             <Link key={vehicle.id} to={`/vehicles/${vehicle.id}`} className="vehicle-card">
               {imageUrl ? (
                 <img
-                  src={`http://127.0.0.1:8000${imageUrl}`}
+                  src={`${import.meta.env.VITE_API_URL}${imageUrl}`}
                   alt={`${vehicle.brand} ${vehicle.model}`}
                   className="vehicle-image"
                 />

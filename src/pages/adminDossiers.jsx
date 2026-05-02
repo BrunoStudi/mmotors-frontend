@@ -191,7 +191,7 @@ export default function AdminDossiers() {
                     documents[dossier.id].map((doc) => (
                       <a
                         key={doc.id}
-                        href={`http://127.0.0.1:8000${doc.file_url}`}
+                        href={`${import.meta.env.VITE_API_URL}${doc.file_url}`}
                         target="_blank"
                         rel="noreferrer"
                         className="document-link"

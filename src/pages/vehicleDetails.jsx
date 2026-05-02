@@ -95,7 +95,7 @@ export default function VehicleDetails() {
         <div className="vehicle-gallery">
           {selectedImage ? (
             <img
-              src={`http://127.0.0.1:8000${selectedImage}`}
+              src={`${import.meta.env.VITE_API_URL}${selectedImage}`}
               alt={`${vehicle.brand} ${vehicle.model}`}
               className="vehicle-details-image"
             />
@@ -112,7 +112,7 @@ export default function VehicleDetails() {
                   onClick={() => setSelectedImage(img.image_url)}
                 >
                   <img
-                    src={`http://127.0.0.1:8000${img.image_url}`}
+                    src={`${import.meta.env.VITE_API_URL}${img.image_url}`}
                     alt="Miniature véhicule"
                   />
                 </button>

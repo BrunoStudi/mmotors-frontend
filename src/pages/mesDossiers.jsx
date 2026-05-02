@@ -90,7 +90,7 @@ export default function MyDossiers() {
             <article key={dossier.id} className="dossier-card dossier-card-with-image">
               {dossier.vehicle_image ? (
                 <img
-                  src={`http://127.0.0.1:8000${dossier.vehicle_image}`}
+                  src={`${import.meta.env.VITE_API_URL}${dossier.vehicle_image}`}
                   alt={dossier.vehicle_name}
                   className="dossier-image"
                 />
@@ -138,7 +138,7 @@ export default function MyDossiers() {
                     documents[dossier.id].map((doc) => (
                       <a
                         key={doc.id}
-                        href={`http://127.0.0.1:8000${doc.file_url}`}
+                        href={`${import.meta.env.VITE_API_URL}${doc.file_url}`}
                         target="_blank"
                         rel="noreferrer"
                         className="document-link"
