@@ -203,6 +203,7 @@ Une amélioration possible serait l’ajout de tests automatisés avec Vitest ou
 
 ## 14. Structure du projet
 
+```text
 mmotors-frontend/
 │
 ├── src/
@@ -218,6 +219,7 @@ mmotors-frontend/
 ├── vite.config.js
 ├── .env
 └── README.md
+```
 
 ---
 
