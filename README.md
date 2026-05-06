@@ -6,6 +6,52 @@ Cette interface permet aux utilisateurs et administrateurs d’interagir avec l�
 
 ---
 
+## Stack technique
+
+- React
+- React Router
+- Axios
+- CSS moderne
+- JWT Authentication
+- FastAPI REST API
+- Responsive Design
+
+---
+
+## Accueil
+
+![Accueil](screenshots/accueil.png)
+
+---
+
+## Authentification
+
+![Login](screenshots/login.png)
+
+---
+
+## Liste véhicules
+
+![Cars](screenshots/car_list.png)
+
+---
+
+## Détails véhicules
+
+![CarsDetail](screenshots/car_details.png)
+
+## Edition véhicule
+
+![CarEdit](screenshots/modif.png)
+
+---
+
+## Gestion des dossiers
+
+![Dossier](screenshots/gestion.png)
+
+---
+
 ## 1. Prérequis
 
 Avant de lancer le projet, installer :
