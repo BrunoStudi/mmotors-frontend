@@ -9,6 +9,7 @@ import AddVehicle from "./pages/addVehicle"
 import EditVehicle from "./pages/editVehicle"
 import MesDossiers from "./pages/mesDossiers"
 import AdminDossiers from "./pages/adminDossiers"
+import Footer from "./components/footer"
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="/mes-dossiers" element={<MesDossiers />} />
         <Route path="/admin/dossiers" element={<AdminDossiers />} />
       </Routes>
+      <Footer />
     </BrowserRouter>
   )
 }
