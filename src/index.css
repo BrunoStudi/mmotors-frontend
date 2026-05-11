@@ -2,11 +2,13 @@
   box-sizing: border-box;
 }
 
+html,
 body {
   margin: 0;
   font-family: Inter, Arial, sans-serif;
   background: #0f172a;
   color: #f8fafc;
+  overflow: hidden;
 }
 
 a {
@@ -1123,4 +1125,215 @@ a {
 .admin-dossiers-table {
   overflow-x: auto;
   scrollbar-width: thin;
+}
+
+
+
+/* =========================
+   FIX GLOBAL RESPONSIVE
+========================= */
+
+html,
+body {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+img {
+  max-width: 100%;
+}
+
+.vehicles-page,
+.vehicle-details-page,
+.dossiers-page,
+.admin-dossiers-page,
+.auth-page,
+.home-page {
+  width: 100%;
+  max-width: 100%;
+}
+
+/* =========================
+   NAVBAR MOBILE / BURGER
+========================= */
+
+.burger-btn {
+  display: none;
+  background: transparent;
+  border: none;
+  color: #f8fafc;
+  font-size: 34px;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    height: 72px;
+    padding: 0 18px;
+    position: sticky;
+  }
+
+  .navbar-logo {
+    font-size: 22px;
+    max-width: 150px;
+    line-height: 1.1;
+  }
+
+  .burger-btn {
+    display: block;
+  }
+
+  .navbar-links {
+    display: none;
+    position: absolute;
+    top: 72px;
+    left: 12px;
+    right: 12px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    padding: 16px;
+    background: rgba(2, 6, 23, 0.96);
+    border: 1px solid rgba(148, 163, 184, 0.25);
+    border-radius: 18px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(14px);
+    z-index: 1000;
+  }
+
+  .navbar-links.open {
+    display: flex;
+  }
+
+  .navbar-links a,
+  .navbar-links button {
+    width: 100%;
+    text-align: left;
+    padding: 12px 14px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.05);
+  }
+}
+
+/* =========================
+   VEHICLES LIST MOBILE
+========================= */
+
+@media (max-width: 768px) {
+  .vehicles-page {
+    padding: 24px 16px;
+  }
+
+  .vehicles-header h1 {
+    font-size: 38px;
+    letter-spacing: -1px;
+  }
+
+  .vehicle-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+  }
+
+  .vehicle-filters {
+    flex-wrap: wrap;
+  }
+
+  .vehicles-grid {
+    grid-template-columns: 1fr;
+    max-width: 100%;
+  }
+
+  .vehicle-card {
+    width: 100%;
+  }
+
+  .vehicle-content {
+    padding: 18px;
+  }
+}
+
+/* =========================
+   VEHICLE DETAILS MOBILE
+========================= */
+
+@media (max-width: 768px) {
+  .vehicle-details-page {
+    padding: 24px 16px;
+  }
+
+  .vehicle-details-card {
+    grid-template-columns: 1fr;
+    padding: 18px;
+    gap: 22px;
+    border-radius: 22px;
+  }
+
+  .vehicle-details-image,
+  .vehicle-details-placeholder {
+    height: 230px;
+    border-radius: 18px;
+  }
+
+  .vehicle-details-content h1 {
+    font-size: 38px;
+    line-height: 1.05;
+    word-break: break-word;
+  }
+
+  .vehicle-details-price {
+    font-size: 30px;
+  }
+
+  .vehicle-admin-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .vehicle-admin-actions .btn,
+  .dossier-btn {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .vehicle-details-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================
+   DOSSIERS MOBILE
+========================= */
+
+@media (max-width: 768px) {
+  .dossiers-page,
+  .admin-dossiers-page {
+    padding: 24px 16px;
+  }
+
+  .dossiers-header h1,
+  .admin-dossiers-header h1 {
+    font-size: 38px;
+    line-height: 1.05;
+  }
+
+  .dossier-card {
+    padding: 18px;
+  }
+
+  .dossier-top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .admin-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-dossiers-panel {
+    padding: 16px;
+  }
 }
