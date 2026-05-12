@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
+import logo from "../assets/logo.png"
 
 export default function Navbar() {
   const navigate = useNavigate()
@@ -25,7 +26,13 @@ export default function Navbar() {
   return (
     <nav className="navbar">
       <Link to="/" className="navbar-logo" onClick={closeMenu}>
-        M-Motors
+        <img
+          src={logo}
+          alt="M-Motors Logo"
+          className="navbar-logo-img"
+        />
+
+        <span>M-Motors</span>
       </Link>
 
       <button

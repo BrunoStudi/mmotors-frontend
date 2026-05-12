@@ -1390,3 +1390,28 @@ img {
     padding: 40px 18px 20px;
   }
 }
+
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #f8fafc;
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: -0.5px;
+}
+
+.navbar-logo-img {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .navbar-logo-img {
+    width: 34px;
+    height: 34px;
+  }
+}
