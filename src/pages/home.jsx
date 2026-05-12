@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom"
+import { BadgeEuro, CarFront, FileCheck, Wrench } from "lucide-react"
 
 export default function Home() {
   return (
@@ -32,7 +33,10 @@ export default function Home() {
             <span>🚗</span>
           </div>
 
-          <h3>Service premium</h3>
+          <div className="premium-title">
+            <Wrench size={28} />
+            <h3>Service premium</h3>
+          </div>
 
           <ul>
             <li>Véhicules contrôlés</li>
@@ -45,20 +49,35 @@ export default function Home() {
 
       <section className="features">
         <article>
-          <h3>Achat</h3>
+          <div className="feature-title">
+            <div className="feature-icon">
+              <BadgeEuro size={26} />
+            </div>
+            <h3>Achat</h3>
+          </div>
           <p>Consultez les véhicules disponibles à la vente.</p>
         </article>
 
         <article>
-          <h3>Location</h3>
+          <div className="feature-title">
+            <div className="feature-icon">
+              <CarFront size={26} />
+            </div>
+            <h3>Location</h3>
+          </div>
           <p>Profitez d’une location longue durée avec option d’achat.</p>
         </article>
 
         <article>
-          <h3>Suivi dossier</h3>
+          <div className="feature-title">
+            <div className="feature-icon">
+              <FileCheck size={26} />
+            </div>
+            <h3>Suivi dossier</h3>
+          </div>
           <p>Suivez l’évolution de votre demande depuis votre espace client.</p>
         </article>
       </section>
-    </main>
+    </main >
   )
 }

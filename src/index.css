@@ -1415,3 +1415,50 @@ img {
     height: 34px;
   }
 }
+
+
+.feature-title {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.feature-title h3 {
+  margin: 0;
+}
+
+.feature-icon {
+  width: 46px;
+  height: 46px;
+  min-width: 46px;
+
+  border-radius: 14px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(37, 99, 235, 0.15);
+  color: #60a5fa;
+
+  border: 1px solid rgba(96, 165, 250, 0.25);
+}
+
+
+.premium-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.premium-title h3 {
+  margin: 0;
+  line-height: 1;
+}
+
+.premium-title svg {
+  color: #60a5fa;
+  flex-shrink: 0;
+}
